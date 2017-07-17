@@ -1,14 +1,5 @@
 #!/bin/csh
 
-#PBS -N AMET_Preprocess.csh
-#PBS -l walltime=10:00:00
-#PBS -l nodes=1:ppn=1
-#PBS -q batch
-#PBS -V
-#PBS -m n
-#PBS -j oe
-#PBS -o ./AMET_preprocess.log
-
 ##########################################################
 ##
 ## Creates and/or populates a new AMET-AQ project. Will create
@@ -34,14 +25,14 @@
 ## setup:
 ## Top AMET directory tree
 #setenv AMETBASE ~/AMET 
-setenv AMETBASE /project/amet_aq/AMET_Code/Release_Code_v13/AMET_v13 
+setenv AMETBASE /proj/ie/apps/AMET/CEMPD_AMET_v13
 
 ### Set the database to be used. A new database will be created if it does not already exist ###
 #setenv AMET_DATABASE AMET
-setenv AMET_DATABASE amad_Test_AMETv13_new
+setenv AMET_DATABASE Test_AMETv13_2
 
 ### Project name. Should be unique and must not contain spaces. Will be created if it does not already exist ###
-setenv AMET_PROJECT "aqExample2"
+setenv AMET_PROJECT "aqExample"
 
 ### AQ model (e.g CMAQ) ###
 setenv MODEL_TYPE "CMAQ"
@@ -50,10 +41,12 @@ setenv MODEL_TYPE "CMAQ"
 setenv RUN_DESCRIPTION "AQ example project"
 
 ### User name for the project (defaults to system login name) ###
+setenv login cep-amet
+setenv password LBMVBF1
 setenv USER_NAME `whoami`
 
 ### Email address (not currently used for anything) ###
-setenv EMAIL_ADDR "appel.wyat@epa.gov"
+setenv EMAIL_ADDR "zac@unc.edu"
 
 ### Top of AQ observation data directory ###
 setenv AMET_OBS $AMETBASE/obs/AQ
@@ -110,13 +103,13 @@ setenv DEP_FILE_1 $AMETBASE/model_data/AQ/aqExample/CCTM_CMAQv52_Sep15_cb6_Hemi_
 ### Standard North America networks (should all be set to T for complete analysis) ###
 setenv CASTNET          F
 setenv CASTNET_HOURLY   F
-setenv CASTNET_DAILY_O3 F
+setenv CASTNET_DAILY_O3 T
 setenv IMPROVE          F 
 setenv NADP             F
 setenv CSN              F
 setenv AQS_HOURLY       F
-setenv AQS_DAILY_O3     F
-setenv AQS_DAILY        T
+setenv AQS_DAILY_O3     T
+setenv AQS_DAILY        F
 setenv SEARCH_HOURLY    F
 setenv SEARCH_DAILY     F
 
@@ -200,7 +193,7 @@ endif
 
 ## Check for output directory, create if not present
 if (! -d $AMET_OUT) then
-    mkdir $AMET_OUT
+    mkdir -p $AMET_OUT
 endif
 
 echo "$amet_pass"

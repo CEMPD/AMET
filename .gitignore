@@ -1,0 +1,9 @@
+**/*.o
+**/*.mod
+**/*.exe
+obs
+output
+model_data
+scripts_db/aqExample/aqProject.csh.orig
+configure/amet-config.R.orig
+scripts_analysis/aqExample_UNC
